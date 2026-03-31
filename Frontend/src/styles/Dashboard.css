@@ -1,0 +1,143 @@
+.dashboard-container {
+    padding-bottom: 2rem;
+}
+
+.dashboard-header {
+    margin-bottom: var(--space-xl);
+}
+
+.display-lg {
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--on-surface);
+    line-height: 1.1;
+    margin: var(--space-sm) 0;
+}
+
+.balance-status {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+}
+
+.status-surplus { background: #d0feda; color: #006b55; }
+.status-deficit { background: #ffdad6; color: #ba1a1a; }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    background-color: var(--surface-low) !important;
+    padding: var(--space-lg) !important;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 140px;
+}
+
+.stat-card .accent-strip {
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+}
+
+.accent-credit { background-color: var(--primary-container); }
+.accent-debit { background-color: var(--error); }
+
+.amount-display {
+    font-size: 1.75rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    margin-top: 8px;
+}
+
+.section-header {
+    margin-bottom: var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-header h3 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--on-surface);
+}
+
+/* Tonal Information Planes */
+.activity-list {
+    background-color: transparent !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background-color: var(--surface-low);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+}
+
+.activity-item:hover {
+    background-color: var(--surface-high);
+    transform: translateY(-2px);
+}
+
+.item-main {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+}
+
+.item-content h4 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.amount-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.amount-positive { color: var(--primary); }
+.amount-negative { color: var(--error); }
+
+.rent-alert {
+    background: linear-gradient(135deg, var(--primary) 0%, #00513f 100%) !important;
+    color: white !important;
+    border: none !important;
+    margin-bottom: var(--space-xl) !important;
+}
+
+.invite-badge-tonal {
+    background-color: var(--surface-high);
+    padding: 12px 20px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

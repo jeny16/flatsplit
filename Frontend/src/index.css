@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Precision Color Palette (The Balanced Ledger) */
+  --primary: #006b55;
+  --primary-container: #00d4aa;
+  --on-primary: #ffffff;
+  
+  --secondary: #50606d;
+  --secondary-container: #d4e5f4;
+  
+  --tertiary: #6833ea;
+  --tertiary-container: #c2b0ff;
+  --tertiary-fixed: #e8deff;
+  
+  --background: #f7faf9;
+  --on-background: #181c1c;
+  
+  --surface: #f7faf9;
+  --surface-low: #f1f4f3;
+  --surface-high: #ebeeed;
+  --surface-highest: #e0e3e2;
+  --surface-lowest: #ffffff;
+  
+  --on-surface: #181c1c;
+  --on-surface-variant: #3b4a44;
+  
+  --error: #ba1a1a;
+  --outline-variant: #bacac2;
+
+  /* Typography Rules */
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Layout Tokens */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px; /* The 3rem "Editorial" spacer */
+  
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+  --radius-full: 9999px;
+  
+  --shadow-ambient: 0 12px 24px rgba(24, 28, 28, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--on-surface);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, .display-lg {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em; /* The "Organized" tracking */
+}
+
+.display-lg {
+  font-size: 3rem;
+  line-height: 1.1;
+}
+
+p, span, div {
+  font-family: var(--font-body);
+}
+
+.visual-quiet {
+  color: var(--on-surface-variant);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* The "No-Line" Rule Containers */
+.card {
+  background-color: var(--surface-low);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: all 0.3s ease;
+  border: none !important; /* Strict Enforcement */
+}
+
+.card:hover {
+  background-color: var(--surface-highest);
+  box-shadow: var(--shadow-ambient);
+}
+
+.ghost-border {
+  border: 1px solid rgba(186, 202, 194, 0.15) !important;
+}
+
+/* Specialized Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  color: var(--on-primary);
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  font-size: 0.95rem;
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background-color: var(--surface-highest);
+  color: var(--on-surface);
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+/* Categories Chips */
+.category-chip {
+  background-color: var(--tertiary-fixed);
+  color: var(--tertiary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Glassmorphism Classes */
+.glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Form Styles */
+.form-group label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--on-surface-variant);
+  margin-bottom: 8px;
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.form-input {
+  width: 100%;
+  background-color: var(--surface-high);
+  border: none;
+  border-bottom: 2px solid rgba(186, 202, 194, 0.3);
+  padding: 16px;
+  font-family: var(--font-body);
+  color: var(--on-surface);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 107, 85, 0.05);
+}
+
+/* Flex Utilities */
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-around { display: flex; align-items: center; justify-content: space-around; }
+/* Shimmer Animation & Premium Loaders */
+@keyframes shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+.shimmer {
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 104px; 
+  display: inline-block;
+  position: relative;
+  animation-duration: 1.2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 24px;
+}
+
+.loader-pulse {
+  width: 48px;
+  height: 48px;
+  background-color: var(--primary);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 20px rgba(0, 107, 85, 0.3);
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+}

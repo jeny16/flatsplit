@@ -1,0 +1,69 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.modal-content {
+    background-color: var(--surface);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: var(--space-xl);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 -20px 40px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    margin-bottom: var(--space-xl);
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+}
+
+.amount-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency-prefix {
+    position: absolute;
+    left: var(--space-md);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--on-surface-variant);
+}
+
+.form-input.amount {
+    padding-left: 48px !important;
+    font-size: 2rem !important;
+    font-family: var(--font-display) !important;
+    font-weight: 800 !important;
+    height: 70px !important;
+    background-color: var(--surface-high) !important;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.split-info {
+    padding: var(--space-md) !important;
+    background-color: var(--surface-high) !important;
+}
+
+.flex-1 { flex: 1; }

@@ -1,0 +1,64 @@
+.expenses-container {
+    padding-bottom: 20px;
+}
+
+.page-header {
+    margin-bottom: var(--space-xl);
+}
+
+.btn-icon-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-icon-primary:active {
+    transform: scale(0.95);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg) !important;
+    margin-bottom: var(--space-lg) !important;
+    background-color: var(--surface-high) !important;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+    color: var(--on-surface);
+    font-size: 0.9rem;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.expenses-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.expense-card {
+    padding: var(--space-lg) !important;
+    border-left: 4px solid var(--primary-container);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px !important;
+}
