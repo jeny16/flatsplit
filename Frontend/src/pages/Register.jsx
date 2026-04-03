@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { motion } from 'framer-motion'
 import { ShieldCheck, ArrowRight } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Auth.css'
 
 const Register = () => {
@@ -15,6 +16,7 @@ const Register = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { login } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,9 +24,8 @@ const Register = () => {
     setLoading(true)
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData)
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('user', JSON.stringify(res.data.user))
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData)
+      login(res.data.user, res.data.token)
       navigate('/setup')
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed')

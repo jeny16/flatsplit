@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const Home = () => {
+  const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
   
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
+    if (isAuthenticated) {
       navigate('/dashboard')
     } else {
       navigate('/login')
     }
-  }, [navigate])
+  }, [isAuthenticated, navigate])
 
   return null
 }

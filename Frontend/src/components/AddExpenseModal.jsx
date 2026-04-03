@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Info, CreditCard } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Modal.css'
 
 const AddExpenseModal = ({ isOpen, onClose, onRefresh }) => {
+    const { token } = useAuth()
     const [formData, setFormData] = useState({
         title: '',
         amount: '',
@@ -17,8 +19,7 @@ const AddExpenseModal = ({ isOpen, onClose, onRefresh }) => {
     useEffect(() => {
         const fetchFlatDetails = async () => {
             try {
-                const token = localStorage.getItem('token')
-                const res = await axios.get('http://localhost:5000/api/flats/me', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/flats/me`, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 setMembers(res.data.data.members)
@@ -27,21 +28,20 @@ const AddExpenseModal = ({ isOpen, onClose, onRefresh }) => {
             }
         }
         if (isOpen) fetchFlatDetails()
-    }, [isOpen])
+    }, [isOpen, token])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
 
         try {
-            const token = localStorage.getItem('token')
             const perPersonAmount = parseFloat(formData.amount) / members.length
             const splits = members.map(m => ({
                 user: m._id,
                 amount: perPersonAmount
             }))
 
-            await axios.post('http://localhost:5000/api/expenses', 
+            await axios.post(`${import.meta.env.VITE_API_URL}/expenses`, 
                 { ...formData, amount: parseFloat(formData.amount), splits },
                 { headers: { Authorization: `Bearer ${token}` } }
             )

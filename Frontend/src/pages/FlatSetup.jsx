@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { motion } from 'framer-motion'
 import { Plus, Users, ArrowRight, ShieldCheck } from 'lucide-react'
 import Loading from '../components/Loading'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Auth.css'
 
 const FlatSetup = () => {
+    const { user, token, updateUser } = useAuth()
+    const navigate = useNavigate()
     const [view, setView] = useState('choice') 
     const [formData, setFormData] = useState({
         name: '',
@@ -18,28 +22,29 @@ const FlatSetup = () => {
     const handleAction = async (type) => {
         setLoading(true)
         setError('')
-        const token = localStorage.getItem('token')
 
         try {
             let res;
+            const apiUrl = import.meta.env.VITE_API_URL
+            const headers = { Authorization: `Bearer ${token}` }
+
             if (type === 'create') {
-                res = await axios.post('http://localhost:5000/api/flats', {
+                res = await axios.post(`${apiUrl}/flats`, {
                     name: formData.name,
                     rentAmount: formData.rentAmount || 0
-                }, { headers: { Authorization: `Bearer ${token}` } })
+                }, { headers })
             } else {
-                res = await axios.post('http://localhost:5000/api/flats/join', {
+                res = await axios.post(`${apiUrl}/flats/join`, {
                     inviteCode: formData.inviteCode
-                }, { headers: { Authorization: `Bearer ${token}` } })
+                }, { headers })
             }
 
             // Update local user data with new flat ID
-            const user = JSON.parse(localStorage.getItem('user'))
-            user.flat = res.data.data._id
-            localStorage.setItem('user', JSON.stringify(user))
+            const updatedUser = { ...user, flat: res.data.data._id }
+            updateUser(updatedUser)
 
             // Redirect to dashboard
-            window.location.href = '/dashboard'
+            navigate('/dashboard')
         } catch (err) {
             setError(err.response?.data?.message || 'Action failed. Please check inputs.')
         } finally {

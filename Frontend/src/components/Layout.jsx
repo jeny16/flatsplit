@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { Home, PieChart, Users, Menu, LogOut, ChevronRight } from 'lucide-react'
 import axios from 'axios'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Layout.css'
 
 const Layout = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { user, token, logout } = useAuth()
     const [flatName, setFlatName] = useState('FlatSplit');
-    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         const fetchFlat = async () => {
             if (user?.flat) {
                 try {
-                    const token = localStorage.getItem('token');
-                    const res = await axios.get('http://localhost:5000/api/flats/me', {
+                    const res = await axios.get(`${import.meta.env.VITE_API_URL}/flats/me`, {
                         headers: { Authorization: `Bearer ${token}` }
                     });
                     setFlatName(res.data.data.name);
@@ -25,11 +25,10 @@ const Layout = () => {
             }
         };
         fetchFlat();
-    }, [user?.flat]);
+    }, [user?.flat, token]);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        logout();
         navigate('/login');
     };
 

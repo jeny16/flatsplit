@@ -3,9 +3,11 @@ import axios from 'axios'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ArrowDownLeft, Calendar, Copy, User } from 'lucide-react'
 import Loading from '../components/Loading'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Dashboard.css'
 
 const Dashboard = () => {
+    const { user, token } = useAuth()
     const [summary, setSummary] = useState({
         totalOwedToUser: 0,
         totalUserOwes: 0,
@@ -14,17 +16,16 @@ const Dashboard = () => {
     })
     const [flat, setFlat] = useState(null)
     const [loading, setLoading] = useState(true)
-    const [user] = useState(JSON.parse(localStorage.getItem('user')))
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const token = localStorage.getItem('token')
                 const headers = { Authorization: `Bearer ${token}` }
+                const apiUrl = import.meta.env.VITE_API_URL
                 
                 const [summaryRes, flatRes] = await Promise.all([
-                    axios.get('http://localhost:5000/api/analytics/summary', { headers }),
-                    axios.get('http://localhost:5000/api/flats/me', { headers })
+                    axios.get(`${apiUrl}/analytics/summary`, { headers }),
+                    axios.get(`${apiUrl}/flats/me`, { headers })
                 ])
                 
                 setSummary(summaryRes.data.data)
@@ -37,7 +38,7 @@ const Dashboard = () => {
         }
 
         fetchData()
-    }, [])
+    }, [token])
 
     const isRentWindow = () => {
         const day = new Date().getDate()

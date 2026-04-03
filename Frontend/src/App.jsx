@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from './context/AuthContext'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -11,10 +12,9 @@ import Layout from './components/Layout'
 import FlatSetup from './pages/FlatSetup'
 
 function App() {
-  const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'));
-  const isAuthenticated = !!token;
-  const hasFlat = !!user?.flat;
+  const { isAuthenticated, hasFlat, loading } = useAuth();
+
+  if (loading) return null; // Or a loading spinner
 
   return (
     <Router>

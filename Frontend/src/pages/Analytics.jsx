@@ -3,17 +3,18 @@ import axios from 'axios'
 import { motion } from 'framer-motion'
 import { TrendingUp, BarChart3, PieChart } from 'lucide-react'
 import Loading from '../components/Loading'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Dashboard.css'
 
 const Analytics = () => {
+    const { token } = useAuth()
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const token = localStorage.getItem('token')
-                const res = await axios.get('http://localhost:5000/api/analytics/summary', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/analytics/summary`, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 setData(res.data.data)
@@ -24,7 +25,7 @@ const Analytics = () => {
             }
         }
         fetchData()
-    }, [])
+    }, [token])
 
     if (loading) return <Loading message="Analyzing Flat Architecture..." />
 

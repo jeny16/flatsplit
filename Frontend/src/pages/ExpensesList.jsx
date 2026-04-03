@@ -4,18 +4,19 @@ import { motion } from 'framer-motion'
 import { Plus, Search, Filter } from 'lucide-react'
 import AddExpenseModal from '../components/AddExpenseModal'
 import Loading, { SkeletonCard } from '../components/Loading'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Dashboard.css'
 import '../styles/Expenses.css'
 
 const ExpensesList = () => {
+    const { token } = useAuth()
     const [expenses, setExpenses] = useState([])
     const [loading, setLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const fetchExpenses = async () => {
         try {
-            const token = localStorage.getItem('token')
-            const res = await axios.get('http://localhost:5000/api/expenses', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/expenses`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setExpenses(res.data.data)
@@ -28,7 +29,7 @@ const ExpensesList = () => {
 
     useEffect(() => {
         fetchExpenses()
-    }, [])
+    }, [token])
 
     if (loading) return (
         <div className="expenses-container">

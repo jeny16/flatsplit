@@ -3,17 +3,18 @@ import axios from 'axios'
 import { motion } from 'framer-motion'
 import { ShieldCheck, ArrowRight, CheckCircle } from 'lucide-react'
 import Loading from '../components/Loading'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Dashboard.css'
 
 const Balances = () => {
+    const { token } = useAuth()
     const [balances, setBalances] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchBalances = async () => {
             try {
-                const token = localStorage.getItem('token')
-                const res = await axios.get('http://localhost:5000/api/analytics/balances', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/analytics/balances`, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 setBalances(res.data.data)
@@ -24,7 +25,7 @@ const Balances = () => {
             }
         }
         fetchBalances()
-    }, [])
+    }, [token])
 
     if (loading) return <Loading message="Validating Cryptographic Ledger..." />
 
